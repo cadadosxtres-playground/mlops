@@ -1,4 +1,6 @@
-name: Docker
+name: Building Docker image to test
+
+
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -7,8 +9,8 @@ name: Docker
 
 on:
   push:
-    branches:   
-      - '!master'   # excludes master
+    branches-ignore:
+      - main
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
