@@ -84,7 +84,9 @@ jobs:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
-          labels: dev-${{ steps.meta.outputs.labels }}
+          labels: 
+            - ${{ steps.meta.outputs.labels }}
+            - 'dev'
           cache-from: type=gha
           cache-to: type=gha,mode=max
           file: docker/baseimage.Dockerfile
