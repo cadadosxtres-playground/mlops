@@ -37,9 +37,9 @@ jobs:
       # https://github.com/sigstore/cosign-installer
       - name: Install cosign
         if: github.event_name != 'pull_request'
-        uses: sigstore/cosign-installer@6e04d228eb30da1757ee4e1dd75a0ec73a653e06 #v3.1.1
+        uses: sigstore/cosign-installer@v3.5.0 #v3.5.0
         with:
-          cosign-release: 'v2.1.1'
+          cosign-release: 'v2.2.2'
 
       ##### Building Python package
       - uses: actions/setup-python@v4
@@ -50,7 +50,7 @@ jobs:
         with:
           poetry-version: '1.8'
 
-      - name: View poetry --help
+      - name: Poetry build
         run: poetry build
 
       # Workaround: https://github.com/docker/build-push-action/issues/461
