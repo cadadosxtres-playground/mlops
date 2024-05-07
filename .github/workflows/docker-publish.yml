@@ -9,8 +9,6 @@ on:
   push:
     branches:   
       - '!master'   # excludes master
-      - '*/*'       # matches every branch containing a single '/'
-      - '*'         # matches every branch that doesn't contain a '/'
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
