@@ -29,18 +29,16 @@ run_modelapi:
 
 
 define run_image
+### if $(3) is not empty then Running Model API image
     if [ -n "$(3)" ]; then \
 		docker run --rm -it --name $(DOCKER_GENMODEL) \
 		-p 127.0.0.1:$(3):5000/tcp \
-		-v $$PWD/data:/data -v $$PWD/model:/model \
-		-v $$PWD/ml_service:/ml_service \
-		-v $$PWD/requirements.txt:/tmp/requirements.txt \
+	    -v $$PWD/model:/model \
 		-t $(DOCKER_GENMODEL) $(1) $(2); \
     else \
 		docker run --rm -it --name $(DOCKER_GENMODEL) \
-		-v $$PWD/data:/data -v $$PWD/model:/model \
-		-v $$PWD/ml_service:/ml_service \
-		-v $$PWD/requirements.txt:/tmp/requirements.txt \
+		-v $$PWD/data:/data \
+		-v $$PWD/model:/model \
 		-t $(DOCKER_GENMODEL) $(1) $(2); \
     fi
 
