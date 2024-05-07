@@ -11,6 +11,8 @@ on:
   push:
     branches-ignore:
       - main
+      - Release
+      - revert*Release
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
