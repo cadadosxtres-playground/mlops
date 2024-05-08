@@ -1,4 +1,4 @@
-DOCKER_GENMODEL = lmservice
+DOCKER_GENMODEL = mlservice
 
 IP = localhost
 PORT = 5000
@@ -35,6 +35,9 @@ test_modelapi:
 	curl -X POST -H "Content-Type: application/json" \
 	-d '{"tobacco": [0.0], "ldl": [6], "adiposity": [22.5], "famhist" : [1], "typea" : [55], "obesity" :  [29.14], "alcohol" : [3.81], "age" : [38] }' \
 	http://$(IP):$(PORT)/prediction
+
+test_modelapi_ping:
+	curl http://$(IP):$(PORT)/ping
 
 define run_image
 ### if $(3) is not empty then Running Model API image
