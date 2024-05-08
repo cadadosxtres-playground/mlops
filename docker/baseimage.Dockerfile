@@ -12,9 +12,8 @@ ENV MODEL_FILE_PATH=${MODEL_FILE_PATH:-'/model/heart_model.pkl'}
 ARG DATA_FILE_PATH
 ENV DATA_FILE_PATH=${DATA_FILE_PATH:-'/data/heart.csv'}
 
-# ADD ../data /data
+
 ADD ../ml_service /ml_service
-ADD ../requirements.txt /tmp/requirements.txt
 ADD ../dist /tmp/dist
 RUN pip install /tmp/dist/${PACKAGE} && \
 if [ ${USER_ID:-0} -ne 0 ] && [ ${GROUP_ID:-0} -ne 0 ]; then \
