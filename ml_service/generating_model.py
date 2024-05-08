@@ -14,15 +14,15 @@ class GenHeartModel():
         ### Loading and transforming the data
         try:
             self.data = pd.read_csv(data_file_path)
+            print(f'Loaded file {data_file_path}')
+            self.data["famhist"] = self.data["famhist"].map(history_mapping)
+            self.mode_score = 0
+            self.mode_score_test = 0
+            self.model = None
         except FileNotFoundError:
             print(f"ERROR!! loading data file: {data_file_path} does't exists")
         except Exception as e:
             print(f"ERROR!!: Unexpected error loading file; {data_file_path}, error: {e}")
-        print(f'Loaded file {data_file_path}')
-        self.data["famhist"] = self.data["famhist"].map(history_mapping)
-        self.mode_score = 0
-        self.mode_score_test = 0
-        self.model = None
     
 
     def get_data_columns(self):
