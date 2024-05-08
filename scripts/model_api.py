@@ -1,16 +1,21 @@
 from flask import Flask, request, jsonify
-from ml_service.util.heart_model import HeartModel
+from ml_service.heart_model import HeartModel
 import os
 
-MODEL_FILE_PATH=os.environ["MODEL_FILE_PATH"]
 
-heartModel = HeartModel()
+
+
 
 app = Flask(__name__)
 
 @app.route('/prediction', methods=['POST'])
 def predictionAPI():
     if request.method == 'POST':
+        model_file_path=os.environ["MODEL_FILE_PATH"]
+        if not model_file_path:
+            return jsonify({"error": f"environment variable MODEL_FILE_PATH not defined "})
+        else:
+            heartModel = HeartModel(model_file_path)
         # Get JSON data from the request
         json_data = request.json
         

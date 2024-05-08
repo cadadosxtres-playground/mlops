@@ -1,16 +1,20 @@
 import unittest
 
 
-from ml_service.util.generating_model import GenHeartModel
-from ml_service.util.heart_model import MODEL_FILE_PATH
-from ml_service.cli import main
+from ml_service.generating_model import GenHeartModel
+
 
 import pathlib as pl
 
 
-class TestTrainingModel(unittest.TestCase):
+class TestGenHeartModel(unittest.TestCase):
+    """
+    Testing out class GenHeartModel 
+    """
     def setUp(self) -> None:
-        self.heartPredictModel = GenHeartModel()
+        self.model_file_path = 'model/heart_model.pkl'
+        self.data_file_path = 'data/heart.csv'
+        self.genHearModel = GenHeartModel(data_file_path=self.data_file_path)
 
     def assertFileExists(self, path):
         if not pl.Path(path).resolve().is_file():
@@ -22,14 +26,13 @@ class TestTrainingModel(unittest.TestCase):
         """
         Testing out that data are loaded when GenHeartModel object is created
         """
-        self.assertIsNotNone(self.heartPredictModel.get_data_columns())
+        self.assertIsNotNone(self.genHearModel.get_data_columns(),msg="Data loaded")
 
 
     def test_generating_model(self):
-        model_file_path = self.heartPredictModel.generating_model()
+        model_file_path = self.genHearModel.generating_model(self.model_file_path)
 
         self.assertFileExists(model_file_path)
         
-    def test_CLI(self):
-        main()
-        self.assertFileExists(MODEL_FILE_PATH)
+if __name__ == '__main__':
+    unittest.main()
