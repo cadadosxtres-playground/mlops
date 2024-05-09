@@ -8,12 +8,12 @@ This repo is a POC based on the previous experiences run in the [Kubernetes Book
 
 
 
-## ML project Life cicle
+## ML project Life cycle
 
-According to the book [Kubernetes Book Club](https://community.cncf.io/kubernetes-virtual-book-club/), the life of a ML project should cover the stages:
+According to the book [Machine Learning on Kubernetes](https://www.packtpub.com/product/machine-learning-on-kubernetes/9781803241807), the life of a ML project should cover the stages:
 - Codifiy the problem and define success metrics
 - Ingest, clean, and label data
-- Feature Ingenering
+- Feature Ingineering
 - Model Building
 - Model Validaton
 - Model Deployment
