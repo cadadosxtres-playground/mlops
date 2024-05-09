@@ -4,7 +4,7 @@ ARG USER_ID
 ARG GROUP_ID
 
 ARG PACKAGE
-ENV PACKAGE=${PACKAGE:-'ml_service-0.2.0-py3-none-any.whl'}
+ENV PACKAGE=${PACKAGE:-'ml_service-0.3.0-py3-none-any.whl'}
 
 ARG MODEL_FILE_PATH
 ENV MODEL_FILE_PATH=${MODEL_FILE_PATH:-'/model/heart_model.pkl'}
