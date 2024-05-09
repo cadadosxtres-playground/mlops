@@ -20,7 +20,13 @@ nodes:
     hostPort: 443
     protocol: TCP
 - role: worker
+  extraMounts:
+    - hostPath: ../data
+      containerPath: /data
 - role: worker
+  extraMounts:
+    - hostPath: ../data ## WARNING!! <<<--- This a relative path from this file
+      containerPath: /data
 EOF
 ```
 

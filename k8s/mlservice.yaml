@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mlservice
+  name: mlservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mlservice
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: mlservice
+    spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+      volumes:
+      - name: model
+        emptyDir: {}
+      - name: data
+        persistentVolumeClaim:
+          claimName: pvc-data
+      initContainers:
+      - image: ghcr.io/cadadosxtres-playground/mlops:latest
+        name: trainingmodel
+        command: ["python"]
+        args: ["/scripts/cli.py"]
+        volumeMounts:
+        - name: data
+          mountPath: /data
+        - name: model
+          mountPath: /model
+      containers:
+      - image: busybox
+        name: mlservice-shell
+        command: ["tail", "-f", "/dev/null"]
+        volumeMounts:
+        - name: data
+          mountPath: /data
+        - name: model
+          mountPath: /model
+      - image: ghcr.io/cadadosxtres-playground/mlops:latest
+        name: model-api
+        command: ["python"]
+        args: ["/scripts/model_api.py"]
+        ports:
+        - containerPort: 5000
+        volumeMounts:
+        - name: data
+          mountPath: /data
+        - name: model
+          mountPath: /model
+  
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+
